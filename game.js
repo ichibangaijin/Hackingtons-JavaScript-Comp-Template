@@ -1,5 +1,5 @@
 import isTouching from "/isTouching.js"
-import drawGrid from "/drawGrid.js"
+import {drawGrid} from "/drawGrid.js"
 
 window.onload = startGame
 
@@ -85,8 +85,9 @@ function handleInput() {
 function drawFrame() {
 
 	drawBackground();
-	drawPlayer();
-	drawEnemy();
+	drawSprite(player);
+	drawSprite(enemy)
+
 
 }
 
@@ -99,23 +100,14 @@ function drawBackground() {
 
 }
 
-
-
-function drawPlayer() {
-	ctx.fillStyle = player.color;
-	ctx.fillRect(player.x, player.y, player.width, player.height);
+const drawSprite = ({x, y, width, height, color}) => {
+	ctx.fillStyle = color;
+	ctx.fillRect(x, y, width, height);
 	ctx.fillStyle = "black";
 	ctx.font = "12px monospace";
-	ctx.fillText(player.name, player.x + 20, player.y + 55);
+	ctx.fillText(name, x + 20, y + 55);
 }
 
-function drawEnemy() {
-	ctx.fillStyle = enemy.color;
-	ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height)
-	ctx.fillStyle = "white";
-	ctx.font = "12px monospace";
-	ctx.fillText(enemy.name, enemy.x + 20, enemy.y + 55);
-}
 
 function handleCollisions() {
 	if (isTouching(player, enemy)) {
@@ -133,18 +125,18 @@ function handleCollisions() {
 	checkBoundaries(enemy);
 }
 
-function checkBoundaries(sprite) {
-	if (sprite.x >= canvas.width - sprite.width) {
-		sprite.x = canvas.width - sprite.width;
+function checkBoundaries({x, y, width, height}) {
+	if (x >= canvas.width - width) {
+		x = canvas.width - width;
 	}
-	if (sprite.x <= 0) {
-		sprite.x = 0;
+	if (x <= 0) {
+		x = 0;
 	}
-	if (sprite.y <= 0) {
-		sprite.y = 0;
+	if (y <= 0) {
+		y = 0;
 	}
-	if (sprite.y >= canvas.height - sprite.height) {
-		sprite.y = canvas.height - sprite.height;
+	if (y >= canvas.height - height) {
+		y = canvas.height - height;
 	}
 }
 
