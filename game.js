@@ -100,7 +100,7 @@ function drawBackground() {
 
 }
 
-const drawSprite = ({x, y, width, height, color}) => {
+const drawSprite = ({x, y, width, height, color, name}) => {
 	ctx.fillStyle = color;
 	ctx.fillRect(x, y, width, height);
 	ctx.fillStyle = "black";
@@ -109,23 +109,21 @@ const drawSprite = ({x, y, width, height, color}) => {
 }
 
 
-function handleCollisions() {
+const handleCollisions = () => {
 	if (isTouching(player, enemy)) {
 		player.color = "orange";
 		enemy.color = "orange";
-		enemy.name = "isTouching";
-		player.name = "isTouching";
+		
 	} else {
 		player.color = "white";
 		enemy.color = "purple";
-		enemy.name = "enemy";
-		player.name = "player";
+	
 	}
 	checkBoundaries(player);
 	checkBoundaries(enemy);
 }
 
-function checkBoundaries({x, y, width, height}) {
+const checkBoundaries = ({x, y, width, height}) => {
 	if (x >= canvas.width - width) {
 		x = canvas.width - width;
 	}
