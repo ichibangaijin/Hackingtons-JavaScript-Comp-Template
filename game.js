@@ -1,5 +1,5 @@
 import isTouching from "/isTouching.js"
-import {drawGrid} from "/drawGrid.js"
+import drawGrid from "/drawGrid.js"
 
 window.onload = startGame
 
@@ -32,11 +32,11 @@ let enemy = {
 // cache inputs
 let keys = [];
 
-window.onkeydown = function(e) {
+window.onkeydown = (e) => {
 	keys[e.key] = true;
 };
 
-window.onkeyup = function(e) {
+window.onkeyup = (e) => {
 	keys[e.key] = false;
 };
 
@@ -52,7 +52,7 @@ function startGame() {
 
 }
 
-function update() {
+const update = () => {
 	if (stopGame) {
 		window.clearInterval(gameLoop)
 	} else {
@@ -65,7 +65,7 @@ function update() {
 }
 
 // handle inputs, handle player, handle enemies, etc
-function handleInput() {
+const handleInput = () => {
 	if (keys["ArrowRight"]) {
 		player.x += 10;
 	}
@@ -123,9 +123,10 @@ const handleCollisions = () => {
 	checkBoundaries(enemy);
 }
 
-const checkBoundaries = ({x, y, width, height}) => {
+let checkBoundaries = ({x, y, width, height}) => {
 	if (x >= canvas.width - width) {
 		x = canvas.width - width;
+		console.log(canvas.width)
 	}
 	if (x <= 0) {
 		x = 0;

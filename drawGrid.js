@@ -17,4 +17,4 @@ function drawGrid(ctx) {
 	ctx.stroke();
 }
 
-export {drawGrid}
+export default drawGrid
